@@ -17,15 +17,23 @@ app.use('/API', router);
 
 
 router.route('/users').get((request, response) => {
-  DBUsers.getUsers().then((result) => {
-    response.json(result);
-  });
+  try {
+    DBUsers.getUsers().then((result) => {
+      response.json(result);
+    });
+  } catch (err) {
+    response.status(400).end(err);
+  }
 });
 
 router.route('/users/:id').get((request, response) => {
-  DBUsers.getUserById(request.params.id).then((result) => {
-    response.json(result);
-  });
+  try {
+    DBUsers.getUserById(request.params.id).then((result) => {
+      response.json(result);
+    });
+  } catch (error) {
+    response.status(400).end(err);
+  }
 });
 
 // app.get('/', (request, response) => {

@@ -21,7 +21,7 @@ async function getUserById(id) {
     );
     return result.recordsets;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 }
 
@@ -33,7 +33,7 @@ async function getUserByUsername(username) {
     );
     console.log(result.recordset);
   } catch (err) {
-    console.log(err);
+    return err;
   }
 }
 

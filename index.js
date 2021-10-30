@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const personas = [
   {
     'id': 1,
@@ -13,18 +14,32 @@ const personas = [
 
 const express = require('express');
 const cors = require('cors');
+const logger = require('./middleware/loggerMiddleware');
+const DBUsers = require('./users');
+
 const app = express();
-const logger = require('./loggerMiddleware');
+const router = express.Router();
 
 app.use(cors());
-
 app.use(express.json());
-
 app.use(logger);
+app.use('/API', router);
 
+
+router.route('/users').get((request, response) => {
+  DBUsers.getUsers().then((result) => {
+    response.json(result);
+  });
+});
+
+router.route('/users/:id').get((request, response) => {
+  DBUsers.getUserById(request.params.id).then((result) => {
+    response.json(result);
+  });
+});
 
 app.get('/', (request, response) => {
-  response.send('<h1>Hola Mundo</h1>');
+  response.send('<h1>API TEST</h1>');
 });
 
 

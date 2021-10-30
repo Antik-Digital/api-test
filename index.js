@@ -39,7 +39,9 @@ router.route('/users/:id').get((request, response) => {
 });
 
 app.get('/', (request, response) => {
-  response.send('<h1>API TEST</h1>');
+  DBUsers.getUsers().then((result) => {
+    response.json(result);
+  });
 });
 
 

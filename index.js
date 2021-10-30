@@ -1,4 +1,6 @@
 /* eslint-disable new-cap */
+require('dotenv').config();
+
 const personas = [
   {
     'id': 1,
